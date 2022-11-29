@@ -28,15 +28,7 @@ limitations under the License.
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:site" content="@ReiiYoda" />
-  <meta name="twitter:title" content="Arbitrary Style Transfer with TF.js" />
-  <meta name="twitter:description" content="Paint yourself in the style of any painting, right in the browser." />
-  <meta name="twitter:image"
-    content="https://raw.githubusercontent.com/reiinakano/arbitrary-image-stylization-tfjs/master/readme_img/stylize.jpg" />
-
-  <title>Arbitrary Style Transfer in the Browser</title>
+  <title>Galaxy2Painting</title>
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
@@ -59,7 +51,7 @@ limitations under the License.
   <!-- As a heading -->
   <div class="jumbotron jumbotron-fluid py-4" style="text-align: center; background-color: #f5f5f5;">
     <div class="container">
-      <h4>Arbitrary Style Transfer in the Browser</h1>
+      <h4>Galaxy2Painting</h1>
     </div>
   </div>
   <div class="">
@@ -67,28 +59,23 @@ limitations under the License.
       This site may have problems functioning on mobile devices.
       Don't worry, you can still read the description below!
     </div>
-    <ul class="nav nav-tabs nav-fill" id="myTab" role="tablist">
-      <li class="nav-item">
-        <a class="nav-link active" id="stylize-tab" data-toggle="tab" href="#stylize" role="tab" aria-controls="stylize"
-          aria-selected="true">Stylize an image</a>
-      </li>
-    </ul>
     <div class="tab-content" id="myTabContent">
       <div class="tab-pane fade show active" id="stylize" role="tabpanel" aria-labelledby="stylize-tab">
         <div class="container">
           <div class="row my-4">
             <div class="col mx-5 my-4">
-              <img id="content-img" class="centered" src="images/chicago.jpg" height=256></img>
+              <img id="content-img" class="centered" src="images/example_content.jpg" height=256></img>
               <br>
               <label for="content-img-size">Content image size</label>
               <i class="far fa-question-circle" data-toggle="tooltip" data-placement="top"
                 title="A bigger content image results in a more detailed output, but increases the processing time significantly."></i>
               <input type="range" min="256" max="400" value="256" class="custom-range centered" id="content-img-size">
               <br>
+              <!-- <input type="file" id="content-select" class="centered custom-select" accept="image/png, image/jpeg"> -->
+
+              <!-- <input type="file" id="content-select" class="centered custom-select" accept="image/png, image/jpeg"> -->
               <select id="content-select" class="centered custom-select">
-                <option value="" disabled>Select content</option>
-                <option value="file">Select from file</option>
-                <option value="stata">Example</option>
+                <option value="file">Upload Image</option>
               </select>
             </div>
             <div class="col mx-5 my-4">
@@ -102,18 +89,12 @@ limitations under the License.
               <input type="range" min="100" max="400" value="256" class="custom-range centered" id="style-img-size">
               <br>
               <select id="style-select" class="centered custom-select">
-                <option value="" disabled>Select a style</option>
-                <option value="file">Select from file</option>
+                <option value="seaport" selected="selected">Sketch</option>
+                <option value="udnie">Surrealism</option>
+                <option value="towers">Crayon Drawing</option>
+                <option value="stripes">Black and White</option>
                 <option value="random">Random image from wikiart.org</option>
-                <option value="udnie">udnie</option>
-                <option value="stripes">stripes</option>
-                <option value="bricks">bricks</option>
-                <option value="clouds">clouds</option>
-                <option value="towers">towers</option>
-                <option value="sketch">sketch</option>
-                <option value="seaport" selected="selected">seaport</option>
-                <option value="red_circles">red_circles</option>
-                <option value="zigzag">zigzag</option>
+                <option value="file">Upload Image</option>
               </select>
             </div>
           </div>
@@ -197,7 +178,7 @@ limitations under the License.
           </div>
           <div class="row my-4">
             <div class="col-md-6 offset-md-3">
-              <img id="c-content-img" class="centered" src="images/statue_of_liberty.jpg" height=256></img>
+              <img id="c-content-img" class="centered" src="images/example_content.jpg" height=256></img>
               <br>
               <label for="c-content-img-size">Content image size</label>
               <i class="far fa-question-circle" data-toggle="tooltip" data-placement="top"
@@ -206,7 +187,6 @@ limitations under the License.
               <br>
               <select id="c-content-select" class="centered custom-select">
                 <option value="" disabled>Select content</option>
-                <option value="pic">Take a picture</option>
                 <option value="file">Select from file</option>
                 <option value="stata">stata</option>
                 <option value="diana">diana</option>
