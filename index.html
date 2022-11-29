@@ -21,7 +21,6 @@ limitations under the License.
     window.dataLayer = window.dataLayer || [];
     function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
-
     gtag('config', 'UA-91864013-5');
   </script>
 
@@ -64,24 +63,21 @@ limitations under the License.
         <div class="container">
           <div class="row my-4">
             <div class="col mx-5 my-4">
-              <img id="content-img" class="centered" src="images/example_content.jpg" height=256></img>
+              <img id="content-img" class="centered" src="images/example.jpg" height=256></img>
               <br>
-              <label for="content-img-size">Content image size</label>
+              <label for="content-img-size">Content Image Size</label>
               <i class="far fa-question-circle" data-toggle="tooltip" data-placement="top"
                 title="A bigger content image results in a more detailed output, but increases the processing time significantly."></i>
               <input type="range" min="256" max="400" value="256" class="custom-range centered" id="content-img-size">
               <br>
-              <!-- <input type="file" id="content-select" class="centered custom-select" accept="image/png, image/jpeg"> -->
-
-              <!-- <input type="file" id="content-select" class="centered custom-select" accept="image/png, image/jpeg"> -->
               <select id="content-select" class="centered custom-select">
                 <option value="file">Upload Image</option>
               </select>
             </div>
             <div class="col mx-5 my-4">
-              <img id="style-img" class="centered" crossorigin="anonymous" src="images/seaport.jpg" height=256></img>
+              <img id="style-img" class="centered" crossorigin="anonymous" src="images/sketch.jpg" height=256></img>
               <br>
-              <label for="style-img-size">Style image size</label>
+              <label for="style-img-size">Style Image Size</label>
               <i class="far fa-question-circle" data-toggle="tooltip" data-placement="top"
                 title='Changing the size of a style image usually affects the texture "seen" by the network.'></i>
               <input id="style-img-square" type="checkbox" style="vertical-align: middle; float: right;"
@@ -89,11 +85,11 @@ limitations under the License.
               <input type="range" min="100" max="400" value="256" class="custom-range centered" id="style-img-size">
               <br>
               <select id="style-select" class="centered custom-select">
-                <option value="seaport" selected="selected">Sketch</option>
-                <option value="udnie">Surrealism</option>
-                <option value="towers">Crayon Drawing</option>
-                <option value="stripes">Black and White</option>
-                <option value="random">Random image from wikiart.org</option>
+                <option value="sketch" selected="selected">Sketch</option>
+                <option value="surrealism">Surrealism</option>
+                <option value="crayon_drawing">Crayon Drawing</option>
+                <option value="black_and_white">Black and White</option>
+                <option value="random">Random Image from wikiart.org</option>
                 <option value="file">Upload Image</option>
               </select>
             </div>
@@ -104,7 +100,7 @@ limitations under the License.
               <br>
               <label for="stylized-img-ratio">Stylization strength</label>
               <i class="far fa-question-circle" data-toggle="tooltip" data-placement="top"
-                title="This parameter affects the stylization strength. The further to the right, the stronger the stylization. This is done via interpolation between the style vectors of the content and style images."></i>
+                title="This parameter affects the stylization strength. The further to the right, the stronger the stylization."></i>
               <input type="range" min="0" max="100" value="100" class="custom-range centered" id="stylized-img-ratio">
             </div>
           </div>
@@ -121,6 +117,7 @@ limitations under the License.
           </div>
         </div>
       </div>
+      <!--  -->
       <div class="tab-pane fade" id="combine" role="tabpanel" aria-labelledby="combine-tab">
         <div class="container">
           <div class="row my-4">
@@ -226,14 +223,14 @@ limitations under the License.
       <div class="row my-4">
         <div class="col-md-3 offset-md-3">
           <select disabled id="model-select-style" class="centered custom-select">
-            <option value="mobilenet" selected="selected">[Fast] Distilled MobileNet style model (9.6MB)</option>
-            <option value="inception">[High quality] Original Inceptionv3 style model (36.3MB)</option>
+            <option value="mobilenet" selected="selected">Fast</option>
+            <option value="inception">High Quality</option>
           </select>
         </div>
         <div class="col-md-3">
           <select disabled id="model-select-transformer" class="centered custom-select">
-            <option value="separable" selected="selected">[Fast] Separable_conv2d transformer (2.4MB)</option>
-            <option value="original">[High quality] Original transformer model (7.9MB)</option>
+            <option value="separable" selected="selected">Fast</option>
+            <option value="original">High Quality</option>
           </select>
         </div>
       </div>
