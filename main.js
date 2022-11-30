@@ -255,7 +255,7 @@ class Main {
     this.styleButton.disabled = false;
     this.modelSelectStyle.disabled = false;
     this.modelSelectTransformer.disabled = false;
-    this.styleButton.textContent = 'Stylize';
+    this.styleButton.textContent = '0%';
   }
 
   disableStylizeButtons() {
@@ -295,7 +295,6 @@ class Main {
     bottleneck.dispose(); // Might wanna keep this around
     stylized.dispose();
   }
-
 }
 
 function getRndInteger(min, max) {
