@@ -51,13 +51,14 @@ limitations under the License.
   </div>
   <div>
     <div id="mobile-warning" hidden class="alert alert-warning" role="alert">
-      This site may have problems functioning on mobile devices.
-      Don't worry, you can still read the description below!
+      <!-- This site may have problems functioning on mobile devices.
+      Don't worry, you can still read the description below! -->
+      这个网页可能在移动设备上有一些问题。别担心，你还是可以阅读这些有趣的知识。
     </div>
     <ul class="nav nav-tabs nav-fill" id="myTab" role="tablist">
       <li class="nav-item">
         <a class="nav-link active" id="stylize-tab" data-toggle="tab" href="#stylize" role="tab" aria-controls="stylize"
-          aria-selected="true">Stylize an Image</a>
+          aria-selected="true">生成图片</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" id="faq-tab" data-toggle="tab" href="#faq" role="tab" aria-controls="faq"
@@ -71,20 +72,20 @@ limitations under the License.
             <div class="col mx-5 my-4">
               <img id="content-img" class="centered" src="images/example.jpg" height=256></img>
               <br>
-              <label for="content-img-size">Content Image Size</label>
+              <label for="content-img-size">图片大小</label>
               <i class="far fa-question-circle" data-toggle="tooltip" data-placement="top"
                 title="A bigger content image results in a more detailed output, but increases the processing time significantly."></i>
               <input type="range" min="256" max="400" value="256" class="custom-range centered" id="content-img-size">
               <br>
               <select id="content-select" class="centered custom-select">
-                <option value="example" selected="selected">Example</option>
-                <option value="file">Upload Image</option>
+                <option value="example" selected="selected">例子：</option>
+                <option value="file">上传图片</option>
               </select>
             </div>
             <div class="col mx-5 my-4">
               <img id="style-img" class="centered" crossorigin="anonymous" src="images/sketch.jpg" height=256></img>
               <br>
-              <label for="style-img-size">Style Image Size</label>
+              <label for="style-img-size">生成图片</label>
               <i class="far fa-question-circle" data-toggle="tooltip" data-placement="top"
                 title='Changing the size of the style image affects the texture learnt by the style network.'></i>
               <input id="style-img-square" type="checkbox" style="vertical-align: middle; float: right;"
@@ -94,10 +95,10 @@ limitations under the License.
               <select id="style-select" class="centered custom-select">
                 <option value="sketch" selected="selected">素描</option>
                 <option value="surrealism">超现实主义</option>
-                <option value="crayon_drawing">Crayon Drawing</option>
-                <option value="black_and_white">Black and White</option>
-                <option value="random">Random Image from wikiart.org</option>
-                <option value="file">Upload Image</option>
+                <option value="crayon_drawing">蜡笔画</option>
+                <option value="black_and_white">黑白画</option>
+                <option value="random">从wikiart.org随机选择一个运动风格</option>
+                <option value="file">上传图片</option>
               </select>
             </div>
           </div>
@@ -106,14 +107,13 @@ limitations under the License.
             <div class="col-md-6 offset-md-3">
               <canvas id="stylized" class="centered"></canvas>
               <br>
-              <label for="stylized-img-ratio">Stylization Strength</label>
+              <label for="stylized-img-ratio">渲染强度</label>
               <input type="range" min="0" max="100" value="100" class="custom-range centered" id="stylized-img-ratio">
             </div>
           </div>
           <div class="row my-4">
             <div class="col-md-5 offset-md-3">
-              <button disabled id="style-button" type="button" class="btn btn-primary btn-block">Loading stylization
-                model. Please wait..</button>
+              <button disabled id="style-button" type="button" class="btn btn-primary btn-block">正在渲染图片，请稍等......</button>
             </div>
             <div class="col-md-1">
               <button type="button" id="randomize" class="btn btn-light btn-block">
@@ -128,14 +128,15 @@ limitations under the License.
       <div class="tab-pane fade" id="faq" role="tabpanel" aria-labelledby="faq-tab">
         <div class="container-fluid pt-5">
           <h5>
-            What is this project?
+            这是一个什么项目？
           </h5>
           <p>
-            This project is an adaptation of <a
-              href="https://github.com/reiinakano/arbitrary-image-stylization-tfjs/blob/master/index.html">
-              arbitrary-image-stylization-tfjs</a>.
+            本项目改编自<a
+            href="https://github.com/reiinakano/arbitrary-image-stylization-tfjs/blob/master/index.html">
+            arbitrary-image-stylization-tfjs</a>.
           </p>
           <p>
+            
             Conventional style transfer solutions usually normally limited to a pre-selected handful of styles. In this
             project, two neural networks are used to provide infinitely many styles.
           </p>
