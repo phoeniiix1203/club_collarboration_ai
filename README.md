@@ -20,4 +20,4 @@ And go to `localhost:9966`
 
 ## Credits
 
-Thanks [reiinakano](https://github.com/reiinakano/fast-style-transfer-deeplearnjs) for providing the awesome model
+Thanks [reiinakano](https://github.com/reiinakano/fast-style-transfer-deeplearnjs) for providing the original awesome model.
