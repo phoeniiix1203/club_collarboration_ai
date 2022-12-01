@@ -74,11 +74,11 @@ limitations under the License.
               <br>
               <label for="content-img-size">图片大小</label>
               <i class="far fa-question-circle" data-toggle="tooltip" data-placement="top"
-                title="A bigger content image results in a more detailed output, but increases the processing time significantly."></i>
+                title="更大的图片会提升输出图片的细节，但也会增加运算强度和运算时间"></i>
               <input type="range" min="256" max="400" value="256" class="custom-range centered" id="content-img-size">
               <br>
               <select id="content-select" class="centered custom-select">
-                <option value="example" selected="selected">例子：</option>
+                <option value="example" selected="selected">默认</option>
                 <option value="file">上传图片</option>
               </select>
             </div>
@@ -87,7 +87,7 @@ limitations under the License.
               <br>
               <label for="style-img-size">生成图片</label>
               <i class="far fa-question-circle" data-toggle="tooltip" data-placement="top"
-                title='Changing the size of the style image affects the texture learnt by the style network.'></i>
+                title='修改图片的大小会直接影响生成图像的质感'></i>
               <input id="style-img-square" type="checkbox" style="vertical-align: middle; float: right;"
                 data-toggle="tooltip" data-placement="top" hidden=True>
               <input type="range" min="100" max="400" value="256" class="custom-range centered" id="style-img-size">
@@ -97,7 +97,7 @@ limitations under the License.
                 <option value="surrealism">超现实主义</option>
                 <option value="crayon_drawing">蜡笔画</option>
                 <option value="black_and_white">黑白画</option>
-                <option value="random">从wikiart.org随机选择一个运动风格</option>
+                <option value="random">从wikiart.org随机选择一个风格</option>
                 <option value="file">上传图片</option>
               </select>
             </div>
@@ -136,39 +136,42 @@ limitations under the License.
             arbitrary-image-stylization-tfjs</a>.
           </p>
           <p>
+            一般卷积风格迁移器只能进行一种的风格迁移。但是在这个项目中，我们使用了一个新的方法，可以同时进行多种风格迁移。
+            <!-- Conventional style transfer solutions usually normally limited to a pre-selected handful of styles. In this
+            project, two neural networks are used to provide infinitely many styles. -->
+          </p>
+          <p>
+            更具体一点, 一个 <i>风格学习网络</i> 先将 <b>任意</b> 的选定的图片进行处理并生成一个
+            。
+            用来代表这个图片中蕴含的风格特征的100维的向量。 该风格向量
+            会被载入到 <i>风格迁移网络中</i>, 并对之后输入的图片进行风格迁移。
             
-            Conventional style transfer solutions usually normally limited to a pre-selected handful of styles. In this
-            project, two neural networks are used to provide infinitely many styles.
-          </p>
-          <p>
-            To be more specific, a <i>style network</i> first learns from <b>any</b> selected image and produce a
-            100-dimensional vector
-            representing its style. This style vector is
-            then fed into the <i>transformer network</i>, along
-            with the content image, to produce the final stylized image.
           </p>
           <h5>
-            Is my data safe? Can you see my pictures?
+            我的图片安全吗？你能看到我的图片吗？
+            <!-- Is my data safe? Can you see my pictures? -->
           </h5>
           <p>
-            Both neural networks run in your browser. Your data and pictures <b>never</b> leave your computer!
+            风格学习网络都只通过浏览器本地上运行。你的数据和图片 <b>从未</b> 被发送到互联网上。
           </p>
           <h5>
-            How big are the models downloaded?
+            <!-- How big are the models downloaded? -->
+            本地下载运行的模型有多大？
           </h5>
           <p>
-            The distilled style network is ~9.6MB, while the separable convolution
-            transformer network is ~2.4MB,
-            for a total of ~12MB. Since these models work for any style, they only
-            have to be downloaded once!
+            这个优化过的神经网络模型只有 9.6MB 大小，与其相配套的风格迁移网络的大小只有2.4MB大小。
+            共计 12MB 大小。由于该风格迁移网络是完全适用于任何的风格类型，仅需下载一次，不会反复占用电脑空间。
           </p>
           <h5>
-            The image produced seems blurred/ugly/unsatisfactory?
+            <!-- The image produced seems blurred/ugly/unsatisfactory? -->
+            生成的图片看起来模糊不清？不好看？不尽人意？
           </h5>
           <p>
-            Try again with different style image size and stylization strength. You can also use the "randomize
+            试着使用不同的图片大小以及风格化强度。或者你也可以选择“随机参数”选项，试试随机的效果！
+
+            <!-- Try again with different style image size and stylization strength. You can also use the "randomize
             parameters"
-            button!
+            button! -->
           </p>
         </div>
       </div>
@@ -180,7 +183,7 @@ limitations under the License.
         <div class="modal-dialog modal-lg" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Take a snapshot!</h5>
+              <h5 class="modal-title" id="exampleModalLabel">拍张图片！</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -189,8 +192,8 @@ limitations under the License.
               <video id="webcam-video" class="centered" width="500" height="375"></video>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-              <button type="button" class="btn btn-primary" id="snap-button">Snap!</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+              <button type="button" class="btn btn-primary" id="snap-button">茄子！</button>
             </div>
           </div>
         </div>
