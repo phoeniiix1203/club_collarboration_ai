@@ -249,7 +249,7 @@ class Main {
       const randomNumber = Math.floor(Math.random() * links.length);
       element.src = links[randomNumber];
     } else {
-      element.src = 'img/' + selectedValue + '.jpg';
+      element.src = 'images/' + selectedValue + '.jpg';
     }
   }
 

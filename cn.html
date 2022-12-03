@@ -114,8 +114,7 @@ limitations under the License.
           </div>
           <div class="row my-4">
             <div class="col-md-5 offset-md-3">
-              <button disabled id="style-button" type="button"
-                class="btn btn-primary btn-block">正在加载模型，请稍等......</button>
+              <button disabled id="style-button" type="button" class="btn btn-primary btn-block">正在加载模型，请稍等</button>
             </div>
             <div class="col-md-1">
               <button type="button" id="randomize" class="btn btn-light btn-block">
@@ -142,7 +141,7 @@ limitations under the License.
           </h5>
           <p>
             本项目改编自<a href="https://github.com/reiinakano/arbitrary-image-stylization-tfjs/blob/master/index.html">
-              arbitrary-image-stylization-tfjs</a>.
+              arbitrary-image-stylization-tfjs</a>，利用人工智能技术将图片（主要为天文相关）转换成不同风格。
           </p>
           <p>
             一般的滤镜或神经网络只能进行一种风格迁移。但是 Galaxy2Painting 能够进行任意多种风格迁移。
@@ -150,9 +149,9 @@ limitations under the License.
             project, two neural networks are used to provide infinitely many styles. -->
           </p>
           <p>
-            具体地, 一个 <i>风格学习网络</i> 先将 <b>任意</b> 被选定的图片进行处理并生成一个用来代表这个图片中蕴含的风格特征的 100 维的向量。该风格向量会被载入到
-            <i>风格迁移网络</i>中,并对之后输入的图片进行风格迁移。
-
+            具体地, 一个 <i>风格学习网络</i> 先将 <b>任意</b> 被选定的风格图片进行处理并生成一个用来代表这个图片中蕴含的风格特征的 100
+            维的向量。例如，如果是被选定的风格图片是一副素描，那么风格向量就会记录下铅笔的质感。随后，该风格向量会被载入到
+            <i>风格迁移网络</i>中,并对之后输入的图片中原有的特征替换成风格向量所记录的风格。
           </p>
           <h5>
             我所上传的图片会被保存吗？
@@ -173,7 +172,7 @@ limitations under the License.
             生成的图片看起来模糊不清？不好看？不尽人意？
           </h5>
           <p>
-            请理解神经网络可能存在的局限性。你可以尝试一下调整图片的大小以及渲染的强度，毕竟ai本来就是一个“炼丹”的过程。
+            尝试一下调整图片的大小以及渲染的强度，或使用“随机化”按钮！
 
             <!-- Try again with different style image size and stylization strength. You can also use the "randomize
             parameters"
