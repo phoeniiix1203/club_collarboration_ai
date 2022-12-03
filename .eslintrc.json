@@ -9,10 +9,10 @@
   },
   "rules": {
     "max-len": [
-      "warn"
+      "off"
     ],
     "require-jsdoc": [
-      "warn"
+      "off"
     ]
   }
 }

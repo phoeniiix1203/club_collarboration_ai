@@ -44,6 +44,7 @@ limitations under the License.
 </style>
 
 <body>
+  <input type="file" id="file-select" style="display: none" accept="image/x-png,image/gif,image/jpeg" />
   <div class="jumbotron jumbotron-fluid py-4" style="text-align: center; background-color: #f5f5f5;">
     <div class="container">
       <h4>Galaxy2Painting</h1>
@@ -62,7 +63,7 @@ limitations under the License.
       </li>
       <li class="nav-item">
         <a class="nav-link" id="faq-tab" data-toggle="tab" href="#faq" role="tab" aria-controls="faq"
-          aria-selected="false">FAQ</a>
+          aria-selected="false">帮助</a>
       </li>
     </ul>
     <div class="tab-content" id="myTabContent">
@@ -87,7 +88,7 @@ limitations under the License.
               <br>
               <label for="style-img-size">生成图片</label>
               <i class="far fa-question-circle" data-toggle="tooltip" data-placement="top"
-                title='修改图片的大小会直接影响生成图像的质感'></i>
+                title='修改图片的大小会影响生成图像的清晰度'></i>
               <input id="style-img-square" type="checkbox" style="vertical-align: middle; float: right;"
                 data-toggle="tooltip" data-placement="top" hidden=True>
               <input type="range" min="100" max="400" value="256" class="custom-range centered" id="style-img-size">
@@ -97,7 +98,7 @@ limitations under the License.
                 <option value="surrealism">超现实主义</option>
                 <option value="crayon_drawing">蜡笔画</option>
                 <option value="black_and_white">黑白画</option>
-                <option value="random">从wikiart.org随机选择一个风格</option>
+                <option value="random">从 wikiart.org 随机选择一个风格</option>
                 <option value="file">上传图片</option>
               </select>
             </div>
@@ -113,7 +114,8 @@ limitations under the License.
           </div>
           <div class="row my-4">
             <div class="col-md-5 offset-md-3">
-              <button disabled id="style-button" type="button" class="btn btn-primary btn-block">正在渲染图片，请稍等......</button>
+              <button disabled id="style-button" type="button"
+                class="btn btn-primary btn-block">正在加载模型，请稍等......</button>
             </div>
             <div class="col-md-1">
               <button type="button" id="randomize" class="btn btn-light btn-block">
@@ -128,25 +130,29 @@ limitations under the License.
       <div class="tab-pane fade" id="faq" role="tabpanel" aria-labelledby="faq-tab">
         <div class="container-fluid pt-5">
           <h5>
-            这是一个什么网页？
+            模型加载失败/网页显示不正常？
+            <!-- The model fails to load/the website does not display properly? -->
           </h5>
           <p>
-            本网页改编自<a
-            href="https://github.com/reiinakano/arbitrary-image-stylization-tfjs/blob/master/index.html">
-            arbitrary-image-stylization-tfjs</a>是一个利用ai技术将图片转换成不同风格的网页。
+            尝试使用基于 chromium 的浏览器，例如 Chrome 或 Edge(Safari 浏览器基于 Webkit)
+            <!-- Try to use chromium-based browsers such as Chrome and Edge(Safari is based on Webkit). -->
+          </p>
+          <h5>
+            Galaxy2Painting 是什么？
+          </h5>
+          <p>
+            本项目改编自<a href="https://github.com/reiinakano/arbitrary-image-stylization-tfjs/blob/master/index.html">
+              arbitrary-image-stylization-tfjs</a>.
           </p>
           <p>
-            项目优势：
-            该项目可以实现任意风格的选择以及转换。其底层原理是运用了两个神经网络，一个是用于提取图片的特征，另一个是用于将特征转换成不同风格的图片。从而实现了任意风格的转换。而之前的传统的相同类型的项目，只能实现固定的风格的转换。仅能实现单一风格迁移。
+            一般的滤镜或神经网络只能进行一种风格迁移。但是 Galaxy2Painting 能够进行任意多种风格迁移。
             <!-- Conventional style transfer solutions usually normally limited to a pre-selected handful of styles. In this
             project, two neural networks are used to provide infinitely many styles. -->
           </p>
           <p>
-            实现原理：
-            首先，一个 <i>风格学习器</i> 先将 <b>任意</b> 的选定的图片进行处理并生成一个
-            相对应的100维的向量。 该向量也被称为风格向量，主要用于记录这种风格的一些具体细节。例如，如果是素描风格，那么风格向量就会记录下铅笔的质感。
-            随后，该向量会作为参数传入到 <i>风格迁移器中</i>。此时，如果向风格迁移器中传入图片，那么风格迁移器就会将图片的原有的特征替换成风格向量所记录的风格。通过更改不同的风格向量，我们可以实现不同的种类风格的迁移。
-            
+            具体地, 一个 <i>风格学习网络</i> 先将 <b>任意</b> 被选定的图片进行处理并生成一个用来代表这个图片中蕴含的风格特征的 100 维的向量。该风格向量会被载入到
+            <i>风格迁移网络</i>中,并对之后输入的图片进行风格迁移。
+
           </p>
           <h5>
             我所上传的图片会被保存吗？
@@ -177,27 +183,6 @@ limitations under the License.
       </div>
       <div id="model-select-style" value="mobilenet"></div>
       <div id="model-select-transformer" value="selected"></div>
-
-      <div class="modal fade" id="cam-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">拍张图片！</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <video id="webcam-video" class="centered" width="500" height="375"></video>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
-              <button type="button" class="btn btn-primary" id="snap-button">茄子！</button>
-            </div>
-          </div>
-        </div>
-      </div>
 
       <script>
         function changeLang() {

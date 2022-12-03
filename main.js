@@ -199,13 +199,14 @@ class Main {
 
     // Initialize selectors
     this.contentSelect = document.getElementById('content-select');
-    this.contentSelect.onchange = (evt) => this.setImage(this.contentImg, evt.target.value);
+    this.contentSelect.onchange = (evt) => {
+      this.setImage(this.contentImg, evt.target.value);
+    };
     this.contentSelect.onclick = () => this.contentSelect.value = '';
     this.styleSelect = document.getElementById('style-select');
     this.styleSelect.onchange = (evt) => this.setImage(this.styleImg, evt.target.value);
     this.styleSelect.onclick = () => this.styleSelect.value = '';
   }
-
 
   connectImageAndSizeSlider(img, slider, square) {
     slider.oninput = (evt) => {
@@ -229,9 +230,11 @@ class Main {
 
   // Helper function for setting an image
   setImage(element, selectedValue) {
+    console.log(this.fileSelect.value);
+    console.log('selecting file');
     if (selectedValue === 'file') {
-      console.log('file selected');
       this.fileSelect.onchange = (evt) => {
+        console.log('file selected');
         const f = evt.target.files[0];
         const fileReader = new FileReader();
         fileReader.onload = ((e) => {
@@ -240,14 +243,13 @@ class Main {
         fileReader.readAsDataURL(f);
         this.fileSelect.value = '';
       };
+      console.log('file selected');
       this.fileSelect.click();
-    } else if (selectedValue === 'pic') {
-      this.openModal(element);
     } else if (selectedValue === 'random') {
       const randomNumber = Math.floor(Math.random() * links.length);
       element.src = links[randomNumber];
     } else {
-      element.src = 'images/' + selectedValue + '.jpg';
+      element.src = 'img/' + selectedValue + '.jpg';
     }
   }
 
