@@ -45,167 +45,174 @@ limitations under the License.
 
 <body>
   <input type="file" id="file-select" style="display: none" accept="image/x-png,image/gif,image/jpeg" />
-  <div class="jumbotron jumbotron-fluid py-4" style="text-align: center; background-color: #f5f5f5;">
-    <div class="container">
-      <h4>Galaxy2Painting</h1>
-    </div>
+  <style>
+    @font-face {
+      font-family: 'HYWenHei';
+      src: url('fonts/HYWenHei.ttf')
+    }
+  </style>
+  <div class="jumbotron jumbotron-fluid py-4" style="text-align: center; background-color: #ffffff;">
+    <h1 style="font-family: HYWenHei">Project: Galaxy2Painting</h1>
   </div>
-  <div>
-    <div id="mobile-warning" hidden class="alert alert-warning" role="alert">
-      This site may have problems functioning on mobile devices.
-      Don't worry, you can still read the description below!
+  <div id="mobile-warning" hidden class="alert alert-warning" role="alert">
+    Warning: This site may have problems functioning on mobile devices
+  </div>
+  <ul class="nav nav-tabs nav-fill" id="myTab" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link active" id="stylize-tab" data-toggle="tab" href="#stylize" role="tab" aria-controls="stylize"
+        aria-selected="true">Stylize an Image</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="faq-tab" data-toggle="tab" href="#faq" role="tab" aria-controls="faq"
+        aria-selected="false">FAQ</a>
+    </li>
+  </ul>
+  <div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="stylize" role="tabpanel" aria-labelledby="stylize-tab">
+      <div class="container">
+        <div class="row my-4">
+          <div class="col mx-5 my-4">
+            <img id="content-img" class="centered" src="images/example.jpg" height=256></img>
+            <br>
+            <label for="content-img-size">Content Image Size</label>
+            <i class="far fa-question-circle" data-toggle="tooltip" data-placement="top"
+              title="A bigger content image results in a more detailed output, but increases the processing time significantly."></i>
+            <input type="range" min="256" max="400" value="256" class="custom-range centered" id="content-img-size">
+            <br>
+            <select id="content-select" class="centered custom-select">
+              <option value="example" selected="selected">Blackhole</option>
+              <option value="m87">M87 Nabula</option>
+              <option value="supernova">Supernova</option>
+              <option value="file">Your Own Image</option>
+            </select>
+          </div>
+          <div class="col mx-5 my-4">
+            <img id="style-img" class="centered" crossorigin="anonymous" src="images/sketch.jpg" height=256></img>
+            <br>
+            <label for="style-img-size">Style Image Size</label>
+            <i class="far fa-question-circle" data-toggle="tooltip" data-placement="top"
+              title='Changing the size of the style image affects the texture learnt by the style network.'></i>
+            <input id="style-img-square" type="checkbox" style="vertical-align: middle; float: right;"
+              data-toggle="tooltip" data-placement="top" hidden=True>
+            <input type="range" min="100" max="400" value="256" class="custom-range centered" id="style-img-size">
+            <br>
+            <select id="style-select" class="centered custom-select">
+              <option value="sketch" selected="selected">Sketch</option>
+              <option value="surrealism">Surrealism</option>
+              <option value="crayon_drawing">Crayon Drawing</option>
+              <option value="black_and_white">Black and White</option>
+              <option value="oil_painting">Oil Painting</option>
+              <option value="shui_mo">Shui Mo</option>
+              <option value="random">Random Image from wikiart.org</option>
+              <option value="file">Your Own Image</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row my-4">
+          <div class="col-md-6 offset-md-3">
+            <canvas id="stylized" class="centered"></canvas>
+            <br>
+            <label for="stylized-img-ratio">Stylization Strength</label>
+            <input type="range" min="0" max="100" value="100" class="custom-range centered" id="stylized-img-ratio">
+          </div>
+        </div>
+        <div class="row my-4">
+          <div class="col-md-5 offset-md-3">
+            <button disabled id="style-button" type="button" class="btn btn-primary btn-block">Loading stylization
+              model</button>
+          </div>
+          <div class="col-md-1">
+            <button type="button" id="randomize" class="btn btn-light btn-block">
+              <i class="fas fa-random" data-toggle="tooltip" data-placement="top" title="Randomize parameters"></i>
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
-    <ul class="nav nav-tabs nav-fill" id="myTab" role="tablist">
-      <li class="nav-item">
-        <a class="nav-link active" id="stylize-tab" data-toggle="tab" href="#stylize" role="tab" aria-controls="stylize"
-          aria-selected="true">Stylize an Image</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" id="faq-tab" data-toggle="tab" href="#faq" role="tab" aria-controls="faq"
-          aria-selected="false">FAQ</a>
-      </li>
-    </ul>
-    <div class="tab-content" id="myTabContent">
-      <div class="tab-pane fade show active" id="stylize" role="tabpanel" aria-labelledby="stylize-tab">
-        <div class="container">
-          <div class="row my-4">
-            <div class="col mx-5 my-4">
-              <img id="content-img" class="centered" src="images/example.jpg" height=256></img>
-              <br>
-              <label for="content-img-size">Content Image Size</label>
-              <i class="far fa-question-circle" data-toggle="tooltip" data-placement="top"
-                title="A bigger content image results in a more detailed output, but increases the processing time significantly."></i>
-              <input type="range" min="256" max="400" value="256" class="custom-range centered" id="content-img-size">
-              <br>
-              <select id="content-select" class="centered custom-select">
-                <option value="example" selected="selected">Blackhole</option>
-                <option value="m87">M87 Nabula</option>
-                <option value="supernova">Supernova</option>
-                <option value="file">Your Own Image</option>
-              </select>
-            </div>
-            <div class="col mx-5 my-4">
-              <img id="style-img" class="centered" crossorigin="anonymous" src="images/sketch.jpg" height=256></img>
-              <br>
-              <label for="style-img-size">Style Image Size</label>
-              <i class="far fa-question-circle" data-toggle="tooltip" data-placement="top"
-                title='Changing the size of the style image affects the texture learnt by the style network.'></i>
-              <input id="style-img-square" type="checkbox" style="vertical-align: middle; float: right;"
-                data-toggle="tooltip" data-placement="top" hidden=True>
-              <input type="range" min="100" max="400" value="256" class="custom-range centered" id="style-img-size">
-              <br>
-              <select id="style-select" class="centered custom-select">
-                <option value="sketch" selected="selected">Sketch</option>
-                <option value="surrealism">Surrealism</option>
-                <option value="crayon_drawing">Crayon Drawing</option>
-                <option value="black_and_white">Black and White</option>
-                <option value="oil_painting">Oil Painting</option>
-                <option value="shui_mo">Shui Mo</option>
-                <option value="random">Random Image from wikiart.org</option>
-                <option value="file">Your Own Image</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="row my-4">
-            <div class="col-md-6 offset-md-3">
-              <canvas id="stylized" class="centered"></canvas>
-              <br>
-              <label for="stylized-img-ratio">Stylization Strength</label>
-              <input type="range" min="0" max="100" value="100" class="custom-range centered" id="stylized-img-ratio">
-            </div>
-          </div>
-          <div class="row my-4">
-            <div class="col-md-5 offset-md-3">
-              <button disabled id="style-button" type="button" class="btn btn-primary btn-block">Loading stylization
-                model</button>
-            </div>
-            <div class="col-md-1">
-              <button type="button" id="randomize" class="btn btn-light btn-block">
-                <i class="fas fa-random" data-toggle="tooltip" data-placement="top" title="Randomize parameters"></i>
-              </button>
-            </div>
-          </div>
-        </div>
+    <div class="tab-pane fade" id="faq" role="tabpanel" aria-labelledby="faq-tab">
+      <div class="container-fluid pt-5">
+        <h5>
+          Can not upload image/the website does not display properly?
+        </h5>
+        <p>
+          Try to use chromium-based browsers such as Chrome and Edge(Safari is based on Webkit).
+        </p>
+        <h5>The model fails to load?</h5>
+        <p>
+          This website is deployed on a server in Tokyo. If you are visiting this website from China Mainland, your
+          connection to the server may be slow.
+        </p>
+        <h5>
+          What is Galaxy2Painting?
+        </h5>
+        <p>
+          Galaxy2Painting is an adaptation of <a
+            href="https://github.com/reiinakano/arbitrary-image-stylization-tfjs/blob/master/index.html">
+            arbitrary-image-stylization-tfjs</a>.
+        </p>
+        <p>
+          Conventional style transfer solutions are usually limited to a pre-selected handful of styles. In this
+          project, two neural networks provide infinitely many styles.
+        </p>
+        <p>
+          To be more specific, a <i>style network</i> first learns from <b>any</b> selected image and produce a
+          100-dimensional vector
+          representing its style. This style vector is
+          then fed into the <i>transformer network</i>, along
+          with the content image, to produce the final stylized image.
+        </p>
+        <h5>
+          Is my data safe? Can you see my pictures?
+        </h5>
+        <p>
+          Both neural networks run in your browser. Your data and pictures <b>never</b> leave your computer!
+        </p>
+        <h5>
+          How big are the models downloaded?
+        </h5>
+        <p>
+          The distilled style network is ~9.6MB, while the separable convolution
+          transformer network is ~2.4MB,
+          for a total of ~12 MB. Since these models work for any style, they only
+          have to be downloaded once!
+        </p>
+        <h5>
+          The image produced seems blurred/ugly/unsatisfactory.
+        </h5>
+        <p>
+          Try again with different style image sizes and stylization strength. You can also use the "randomize
+          parameters."
+          button!
+        </p>
       </div>
-      <div class="tab-pane fade" id="faq" role="tabpanel" aria-labelledby="faq-tab">
-        <div class="container-fluid pt-5">
-          <h5>
-            Can not upload image/the model fails to load/the website does not display properly?
-          </h5>
-          <p>
-            Try to use chromium-based browsers such as Chrome and Edge(Safari is based on Webkit).
-          </p>
-          <h5>
-            What is Galaxy2Painting?
-          </h5>
-          <p>
-            Galaxy2Painting is an adaptation of <a
-              href="https://github.com/reiinakano/arbitrary-image-stylization-tfjs/blob/master/index.html">
-              arbitrary-image-stylization-tfjs</a>.
-          </p>
-          <p>
-            Conventional style transfer solutions are usually limited to a pre-selected handful of styles. In this
-            project, two neural networks provide infinitely many styles.
-          </p>
-          <p>
-            To be more specific, a <i>style network</i> first learns from <b>any</b> selected image and produce a
-            100-dimensional vector
-            representing its style. This style vector is
-            then fed into the <i>transformer network</i>, along
-            with the content image, to produce the final stylized image.
-          </p>
-          <h5>
-            Is my data safe? Can you see my pictures?
-          </h5>
-          <p>
-            Both neural networks run in your browser. Your data and pictures <b>never</b> leave your computer!
-          </p>
-          <h5>
-            How big are the models downloaded?
-          </h5>
-          <p>
-            The distilled style network is ~9.6MB, while the separable convolution
-            transformer network is ~2.4MB,
-            for a total of ~12 MB. Since these models work for any style, they only
-            have to be downloaded once!
-          </p>
-          <h5>
-            The image produced seems blurred/ugly/unsatisfactory.
-          </h5>
-          <p>
-            Try again with different style image sizes and stylization strength. You can also use the "randomize
-            parameters."
-            button!
-          </p>
-        </div>
-      </div>
-      <div id="model-select-style" value="mobilenet"></div>
-      <div id="model-select-transformer" value="selected"></div>
+    </div>
+    <div id="model-select-style" value="mobilenet"></div>
+    <div id="model-select-transformer" value="selected"></div>
 
-      <script>
-        function changeLang() {
-          window.location.href = "cn.html"
-        }
-      </script>
-      <div align="center">
-        <button type="button" class="btn btn-secondary" onclick="changeLang()"
-          style="text-align:center;">CN/<b>EN</b></button>
-      </div>
-      <!-- JQuery -->
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-      <!-- Bootstrap tooltips -->
-      <script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
-      <!-- Bootstrap core JavaScript -->
-      <script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <script>
+      function changeLang() {
+        window.location.href = "cn.html"
+      }
+    </script>
+    <div align="center">
+      <button type="button" class="btn btn-secondary" onclick="changeLang()"
+        style="text-align:center;">CN/<b>EN</b></button>
+    </div>
+    <!-- JQuery -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js"></script>
 
-      <script type="text/javascript">
-        $(function () {
-          $('[data-toggle="tooltip"]').tooltip()
-        })
-      </script>
+    <script type="text/javascript">
+      $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+      })
+    </script>
 </body>
 
 </html>
