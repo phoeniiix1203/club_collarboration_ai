@@ -73,22 +73,24 @@ limitations under the License.
             <div class="col mx-5 my-4">
               <img id="content-img" class="centered" src="images/example.jpg" height=256></img>
               <br>
-              <label for="content-img-size">图片大小</label>
+              <label for="content-img-size">源图片大小</label>
               <i class="far fa-question-circle" data-toggle="tooltip" data-placement="top"
-                title="更大的图片会提升输出图片的细节，但也会增加运算强度和运算时间"></i>
+                title="更大的源图片会提升输出图片的细节，同时显著增加运算时间"></i>
               <input type="range" min="256" max="400" value="256" class="custom-range centered" id="content-img-size">
               <br>
               <select id="content-select" class="centered custom-select">
-                <option value="example" selected="selected">默认</option>
-                <option value="file">上传图片</option>
+                <option value="example" selected="selected">黑洞</option>
+                <option value="m87">M87 星云</option>
+                <option value="supernova">超新星</option>
+                <option value="file">自定义</option>
               </select>
             </div>
             <div class="col mx-5 my-4">
               <img id="style-img" class="centered" crossorigin="anonymous" src="images/sketch.jpg" height=256></img>
               <br>
-              <label for="style-img-size">生成图片</label>
+              <label for="style-img-size">风格图片大小</label>
               <i class="far fa-question-circle" data-toggle="tooltip" data-placement="top"
-                title='修改图片的大小会影响生成图像的清晰度'></i>
+                title='修改风格图片的大小会影响神经网络学习到的风格向量'></i>
               <input id="style-img-square" type="checkbox" style="vertical-align: middle; float: right;"
                 data-toggle="tooltip" data-placement="top" hidden=True>
               <input type="range" min="100" max="400" value="256" class="custom-range centered" id="style-img-size">
@@ -97,9 +99,11 @@ limitations under the License.
                 <option value="sketch" selected="selected">素描</option>
                 <option value="surrealism">超现实主义</option>
                 <option value="crayon_drawing">蜡笔画</option>
-                <option value="black_and_white">黑白画</option>
+                <option value="black_and_white">黑白</option>
+                <option value="oil_painting">油画</option>
+                <option value="shui_mo">水墨画</option>
                 <option value="random">从 wikiart.org 随机选择一个风格</option>
-                <option value="file">上传图片</option>
+                <option value="file">自定义</option>
               </select>
             </div>
           </div>
@@ -114,7 +118,7 @@ limitations under the License.
           </div>
           <div class="row my-4">
             <div class="col-md-5 offset-md-3">
-              <button disabled id="style-button" type="button" class="btn btn-primary btn-block">正在加载模型，请稍等</button>
+              <button disabled id="style-button" type="button" class="btn btn-primary btn-block">正在加载模型</button>
             </div>
             <div class="col-md-1">
               <button type="button" id="randomize" class="btn btn-light btn-block">
